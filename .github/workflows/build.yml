@@ -52,16 +52,11 @@ jobs:
         cd ${{ github.workspace }}/V2rayNG
         chmod 755 gradlew
         ./gradlew assembleDebug
+        cd ${{ github.workspace }}/V2rayNG/app/build/outputs/apk/debug/
+        ls -a
 
     - name: Upload debug APK
       uses: actions/upload-artifact@v4
       with:
         name: app-debug.apk
         path: ${{ github.workspace }}/V2rayNG/app/build/outputs/apk/debug/app-debug.apk
-
-    - name: Upload release APK
-      if: steps.build.outputs.has_release_apk == 'true'
-      uses: actions/upload-artifact@v4
-      with:
-        name: app-release.apk
-        path: ${{ github.workspace }}/V2rayNG/app/build/outputs/apk/release/app-release.apk
